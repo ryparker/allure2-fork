@@ -32,7 +32,7 @@ public class ExecutorInfo implements Serializable {
     protected String name;
     protected String type;
     protected String url;
-    protected Long buildOrder;
+    protected String buildOrder;
     protected String buildName;
     protected String buildUrl;
     protected String reportName;

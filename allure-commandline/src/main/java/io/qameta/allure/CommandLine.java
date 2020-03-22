@@ -83,13 +83,11 @@ public class CommandLine {
         } else {
             commandLine = new CommandLine(Paths.get(allureHome));
         }
-        final ExitCode exitCode = commandLine
-                .parse(args)
-                .orElseGet(commandLine::run);
+        final ExitCode exitCode = commandLine.parse(args).orElseGet(commandLine::run);
         System.exit(exitCode.getCode());
     }
 
-    @SuppressWarnings({"PMD.AvoidLiteralsInIfCondition", "ReturnCount"})
+    @SuppressWarnings({ "PMD.AvoidLiteralsInIfCondition", "ReturnCount" })
     public Optional<ExitCode> parse(final String... args) {
         if (args.length == 0) {
             printUsage(commander);
@@ -104,7 +102,7 @@ public class CommandLine {
             return Optional.of(ExitCode.ARGUMENT_PARSING_ERROR);
         }
 
-        //Hack to limit count of main parameters
+        // Hack to limit count of main parameters
         final List<Path> reportDirectories = openCommand.getReportDirectories();
         if (reportDirectories.size() != 1) {
             LOGGER.error("Only one main argument is allowed");
@@ -114,14 +112,8 @@ public class CommandLine {
         return Optional.empty();
     }
 
-    @SuppressWarnings({
-            "CyclomaticComplexity",
-            "NPathComplexity",
-            "ReturnCount",
-            "PMD.NPathComplexity",
-            "PMD.CyclomaticComplexity",
-            "PMD.ExcessiveMethodLength"
-    })
+    @SuppressWarnings({ "CyclomaticComplexity", "NPathComplexity", "ReturnCount", "PMD.NPathComplexity",
+            "PMD.CyclomaticComplexity", "PMD.ExcessiveMethodLength" })
     public ExitCode run() {
         if (mainCommand.getVerboseOptions().isQuiet()) {
             LogManager.getRootLogger().setLevel(Level.OFF);
@@ -149,24 +141,16 @@ public class CommandLine {
         }
         switch (parsedCommand) {
             case GENERATE_COMMAND:
-                return commands.generate(
-                        generateCommand.getReportDirectory(),
+                return commands.generate(generateCommand.getReportDirectory(),
                         generateCommand.getResultsOptions().getResultsDirectories(),
-                        generateCommand.isCleanReportDirectory(),
-                        generateCommand.getConfigOptions()
-                );
+                        generateCommand.isCleanReportDirectory(), generateCommand.getConfigOptions());
             case SERVE_COMMAND:
-                return commands.serve(
-                        serveCommand.getResultsOptions().getResultsDirectories(),
-                        serveCommand.getHostPortOptions().getHost(),
-                        serveCommand.getHostPortOptions().getPort(),
+                return commands.serve(serveCommand.getResultsOptions().getResultsDirectories(),
+                        serveCommand.getHostPortOptions().getHost(), serveCommand.getHostPortOptions().getPort(),
                         serveCommand.getConfigOptions());
             case OPEN_COMMAND:
-                return commands.open(
-                        openCommand.getReportDirectories().get(0),
-                        openCommand.getHostPortOptions().getHost(),
-                        openCommand.getHostPortOptions().getPort()
-                );
+                return commands.open(openCommand.getReportDirectories().get(0),
+                        openCommand.getHostPortOptions().getHost(), openCommand.getHostPortOptions().getPort());
             case PLUGIN_COMMAND:
                 return commands.listPlugins(pluginCommand.getConfigOptions());
             default:

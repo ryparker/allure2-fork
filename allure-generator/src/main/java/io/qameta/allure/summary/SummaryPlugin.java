@@ -41,16 +41,12 @@ public class SummaryPlugin extends CommonJsonAggregator {
 
     @Override
     protected SummaryData getData(final List<LaunchResults> launches) {
-        final SummaryData data = new SummaryData()
-                .setStatistic(new Statistic())
-                .setTime(new GroupTime())
-                .setReportName("Allure Report");
-        launches.stream()
-                .flatMap(launch -> launch.getResults().stream())
-                .forEach(result -> {
-                    data.getStatistic().update(result);
-                    data.getTime().update(result);
-                });
+        final SummaryData data = new SummaryData().setStatistic(new Statistic()).setTime(new GroupTime())
+                .setReportName("GVL Test Report");
+        launches.stream().flatMap(launch -> launch.getResults().stream()).forEach(result -> {
+            data.getStatistic().update(result);
+            data.getTime().update(result);
+        });
         return data;
     }
 }
