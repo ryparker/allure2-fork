@@ -105,12 +105,13 @@ class HistoryTrendPluginTest {
                 assertThat(captor.getValue()).hasSize(4)
                                 .extracting(HistoryTrendItem::getBuildOrder, HistoryTrendItem::getReportName,
                                                 HistoryTrendItem::getReportUrl)
-                                .containsExactly(Tuple.tuple(7L, "some", "some/report#7"),
-                                                Tuple.tuple(6L, "some", "some/report#6"),
-                                                Tuple.tuple(5L, "some", "some/report#5"),
-                                                Tuple.tuple(4L, "some", "some/report#4"));
+                                .containsExactly(Tuple.tuple("7", "some", "some/report#7"),
+                                                Tuple.tuple("6", "some", "some/report#6"),
+                                                Tuple.tuple("5", "some", "some/report#5"),
+                                                Tuple.tuple("4A", "some", "some/report#4"));
         }
 
+        @SuppressWarnings("unchecked")
         @Test
         void shouldProcessCorruptedData(@TempDir final Path resultsDirectory) throws Exception {
                 final Path history = Files.createDirectories(resultsDirectory.resolve("history"));
@@ -187,7 +188,7 @@ class HistoryTrendPluginTest {
                 final List<HistoryTrendItem> history2 = randomHistoryTrendItems();
                 extra2.put(HISTORY_TREND_BLOCK_NAME, history2);
                 extra2.put(EXECUTORS_BLOCK_NAME, new ExecutorInfo().setBuildOrder(""));
-                
+
                 final List<LaunchResults> launchResults = Arrays.asList(
                                 createLaunchResults(extra1, randomTestResult().setStatus(Status.PASSED),
                                                 randomTestResult().setStatus(Status.FAILED),
@@ -202,7 +203,7 @@ class HistoryTrendPluginTest {
 
                 final HistoryTrendItem historyTrendItem = data.get(0);
 
-                assertThat(historyTrendItem).hasFieldOrPropertyWithValue("buildOrder", 7L);
+                assertThat(historyTrendItem).hasFieldOrPropertyWithValue("buildOrder", "");
         }
 
         @Test
