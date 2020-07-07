@@ -1,22 +1,11 @@
 import './styles.scss';
 
-import {
-  max
-} from 'd3-array';
-import {
-  scaleLinear,
-  scaleOrdinal,
-  scalePoint,
-  schemeCategory20,
-} from 'd3-scale';
-import {
-  area,
-  line,
-  stack
-} from 'd3-shape';
+import { area, line, stack } from 'd3-shape';
+import { scaleLinear, scaleOrdinal, scalePoint } from 'd3-scale';
 
 import BaseChartView from '../../components/graph-base/BaseChartView';
 import TooltipView from '../../components/tooltip/TooltipView';
+import { max } from 'd3-array';
 import translate from '../../helpers/t';
 import trendTooltip from './trend-tooltip.hbs';
 
@@ -28,7 +17,7 @@ class TrendChartView extends BaseChartView {
     this.y = scaleLinear();
 
     this.tooltip = new TooltipView({
-      position: 'top'
+      position: 'top',
     });
     this.keys = options.keys || this.model.keys();
 
@@ -36,10 +25,12 @@ class TrendChartView extends BaseChartView {
       .keys(this.keys)
       .value((d, key) => d.data[key] || 0);
 
-    this.color = options.colors || scaleOrdinal(schemeCategory20);
+    this.color =
+      options.colors ||
+      scaleOrdinal().range(['red', 'green', 'blue', '#6b486b', '#a05d56', '#d0743c', '#ff8c00']);
 
     options.notStacked && this.stack.offset(() => {});
-    this.yTickFormat = options.yTickFormat || (d => d);
+    this.yTickFormat = options.yTickFormat || ((d) => d);
   }
 
   onAttach() {
@@ -56,8 +47,8 @@ class TrendChartView extends BaseChartView {
     this.setupViewport();
     this.x.range([0, this.width]);
     this.y.range([this.height, 0]);
-    this.x.domain(data.map(d => d.id));
-    this.y.domain([0, max(data, d => d.total)]).nice();
+    this.x.domain(data.map((d) => d.id));
+    this.y.domain([0, max(data, (d) => d.total)]).nice();
 
     const trendStack = this.stack(data);
     this.makeBottomAxis({
@@ -71,15 +62,9 @@ class TrendChartView extends BaseChartView {
     });
 
     if (document.dir === 'rtl') {
-      this.svg
-        .selectAll('.chart__axis_x')
-        .selectAll('text')
-        .style('text-anchor', 'start');
+      this.svg.selectAll('.chart__axis_x').selectAll('text').style('text-anchor', 'start');
     } else {
-      this.svg
-        .selectAll('.chart__axis_x')
-        .selectAll('text')
-        .style('text-anchor', 'end');
+      this.svg.selectAll('.chart__axis_x').selectAll('text').style('text-anchor', 'end');
     }
 
     this.svg
@@ -97,9 +82,9 @@ class TrendChartView extends BaseChartView {
 
   showAreas(trendStack) {
     const trendArea = area()
-      .x(d => this.x(d.data.id))
-      .y0(d => this.y(d[0]))
-      .y1(d => this.y(d[1]));
+      .x((d) => this.x(d.data.id))
+      .y0((d) => this.y(d[0]))
+      .y1((d) => this.y(d[1]));
 
     this.plot
       .selectAll('.trend__area')
@@ -108,14 +93,14 @@ class TrendChartView extends BaseChartView {
       .append('path')
       .attr('class', 'trend__area')
       .attr('d', trendArea)
-      .style('fill', d => this.color(d.key))
+      .style('fill', (d) => this.color(d.key))
       .style('opacity', 0.85);
   }
 
   showLines(trendStack) {
     const trendLine = line()
-      .x(d => this.x(d.data.id))
-      .y(d => this.y(d[1]));
+      .x((d) => this.x(d.data.id))
+      .y((d) => this.y(d[1]));
 
     this.plot
       .selectAll('.trend__line')
@@ -125,7 +110,7 @@ class TrendChartView extends BaseChartView {
       .attr('class', '.trend__line')
       .attr('d', trendLine)
       .style('stroke-width', 2)
-      .style('stroke', d => this.color(d.key));
+      .style('stroke', (d) => this.color(d.key));
   }
 
   showPoints(trendStack) {
@@ -135,48 +120,43 @@ class TrendChartView extends BaseChartView {
       .enter()
       .append('g')
       .attr('class', '.trend_point')
-      .style('fill', d => this.color(d.key));
+      .style('fill', (d) => this.color(d.key));
 
     points
       .selectAll('.trend_point')
-      .data(d => d)
+      .data((d) => d)
       .enter()
       .append('circle')
       .attr('r', 2)
-      .attr('cx', d => this.x(d.data.id))
-      .attr('cy', d => this.y(d[1]))
+      .attr('cx', (d) => this.x(d.data.id))
+      .attr('cy', (d) => this.y(d[1]))
       .attr('class', 'trend_point');
   }
 
   showSlices(data) {
-    this.plot
-      .selectAll('.slice')
-      .data(data)
-      .enter()
-      .append('g')
-      .attr('class', 'slice');
+    this.plot.selectAll('.slice').data(data).enter().append('g').attr('class', 'slice');
 
     this.plot
       .selectAll('.slice')
-      .filter(d => d.reportUrl)
+      .filter((d) => d.reportUrl)
       .append('a')
       .attr('class', 'edge')
-      .filter(d => d.reportUrl)
-      .attr('xlink:href', d => d.reportUrl);
+      .filter((d) => d.reportUrl)
+      .attr('xlink:href', (d) => d.reportUrl);
 
     this.plot
       .selectAll('.slice')
-      .filter(d => !d.reportUrl)
+      .filter((d) => !d.reportUrl)
       .append('g')
       .attr('class', 'edge');
 
     this.plot
       .selectAll('.edge')
       .append('line')
-      .attr('id', d => d.id)
-      .attr('x1', d => this.x(d.id))
-      .attr('y1', d => this.y(d.total))
-      .attr('x2', d => this.x(d.id))
+      .attr('id', (d) => d.id)
+      .attr('x1', (d) => this.x(d.id))
+      .attr('y1', (d) => this.y(d.total))
+      .attr('x2', (d) => this.x(d.id))
       .attr('y2', this.y(0))
       .attr('stroke', 'white')
       .attr('stroke-width', 1)
@@ -193,7 +173,7 @@ class TrendChartView extends BaseChartView {
       .attr('width', (d, i) =>
         i === 0 || this.x(d.id) === this.width ? this.x.step() / 2 : this.x.step(),
       )
-      .on('mouseover', d => {
+      .on('mouseover', (d) => {
         const anchor = this.plot
           .append('circle')
           .attr('class', 'anchor')
@@ -211,14 +191,14 @@ class TrendChartView extends BaseChartView {
     const tooltipData = {
       ...selectedData,
       data: this.keys
-        .map(key => {
+        .map((key) => {
           return {
             key,
             num: this.yTickFormat(selectedData.data[key]),
             color: this.color(key),
           };
         })
-        .filter(item => !!item.num)
+        .filter((item) => !!item.num)
         .reverse(),
     };
     return trendTooltip(tooltipData);

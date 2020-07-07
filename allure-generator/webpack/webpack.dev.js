@@ -1,5 +1,5 @@
 const webpack = require("webpack");
-const webpackMerge = require("webpack-merge");
+const { merge: webpackMerge } = require("webpack-merge");
 const sass = require("sass");
 const utils = require("./utils.js");
 
@@ -14,7 +14,7 @@ const postcssLoader = {
   },
 };
 
-module.exports = options =>
+module.exports = (options) =>
   webpackMerge(commonConfig({ env: ENV }), {
     devtool: "cheap-module-source-map", // https://reactjs.org/docs/cross-origin-errors.html
     mode: ENV,
