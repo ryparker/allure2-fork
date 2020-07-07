@@ -36,7 +36,7 @@ public class TrendItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    protected Long buildOrder;
+    protected String buildOrder;
 
     protected String reportUrl;
 

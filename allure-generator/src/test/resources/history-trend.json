@@ -8,7 +8,7 @@
       "unknown": 2,
       "total": 20
     },
-    "buildOrder": 7,
+    "buildOrder": "7",
     "reportUrl": "some/report#7",
     "reportName": "some"
   },
@@ -21,7 +21,7 @@
       "unknown": 0,
       "total": 12
     },
-    "buildOrder": 6,
+    "buildOrder": "6",
     "reportUrl": "some/report#6",
     "reportName": "some"
   },
@@ -34,7 +34,7 @@
       "unknown": 0,
       "total": 12
     },
-    "buildOrder": 5,
+    "buildOrder": "5",
     "reportUrl": "some/report#5",
     "reportName": "some"
   },
@@ -47,7 +47,7 @@
       "unknown": 0,
       "total": 1
     },
-    "buildOrder": 4,
+    "buildOrder": "4A",
     "reportUrl": "some/report#4",
     "reportName": "some"
   }

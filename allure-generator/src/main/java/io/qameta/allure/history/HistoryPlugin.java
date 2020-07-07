@@ -62,9 +62,7 @@ public class HistoryPlugin implements Reader, Aggregator {
     //@formatter:on
 
     @Override
-    public void readResults(final Configuration configuration,
-                            final ResultsVisitor visitor,
-                            final Path directory) {
+    public void readResults(final Configuration configuration, final ResultsVisitor visitor, final Path directory) {
         final JacksonContext context = configuration.requireContext(JacksonContext.class);
         final Path historyFile = directory.resolve(HISTORY_BLOCK_NAME).resolve(HISTORY_FILE_NAME);
         if (Files.exists(historyFile)) {
@@ -78,9 +76,8 @@ public class HistoryPlugin implements Reader, Aggregator {
     }
 
     @Override
-    public void aggregate(final Configuration configuration,
-                          final List<LaunchResults> launchesResults,
-                          final Path outputDirectory) throws IOException {
+    public void aggregate(final Configuration configuration, final List<LaunchResults> launchesResults,
+            final Path outputDirectory) throws IOException {
         final JacksonContext context = configuration.requireContext(JacksonContext.class);
         final Path historyFolder = Files.createDirectories(outputDirectory.resolve(HISTORY_BLOCK_NAME));
         final Path historyFile = historyFolder.resolve(HISTORY_FILE_NAME);
@@ -90,22 +87,15 @@ public class HistoryPlugin implements Reader, Aggregator {
     }
 
     private boolean isNewFailed(final List<HistoryItem> histories) {
-        final List<Status> statuses = histories.stream()
-                .sorted(comparingByTime())
-                .map(HistoryItem::getStatus)
+        final List<Status> statuses = histories.stream().sorted(comparingByTime()).map(HistoryItem::getStatus)
                 .collect(Collectors.toList());
-        return statuses.size() > 1
-                && statuses.get(0) == Status.FAILED
-                && statuses.get(1) == Status.PASSED;
+        return statuses.size() > 1 && statuses.get(0) == Status.FAILED && statuses.get(1) == Status.PASSED;
     }
 
     private boolean isFlaky(final List<HistoryItem> histories) {
         if (histories.size() > 1 && histories.get(0).status == Status.FAILED) {
-            final List<Status> statuses = histories.subList(1, histories.size())
-                    .stream()
-                    .sorted(comparingByTime())
-                    .map(HistoryItem::getStatus)
-                    .collect(Collectors.toList());
+            final List<Status> statuses = histories.subList(1, histories.size()).stream().sorted(comparingByTime())
+                    .map(HistoryItem::getStatus).collect(Collectors.toList());
             return statuses.indexOf(Status.PASSED) < statuses.lastIndexOf(Status.FAILED)
                     && statuses.indexOf(Status.PASSED) != -1;
         }
@@ -120,20 +110,15 @@ public class HistoryPlugin implements Reader, Aggregator {
                     return a;
                 });
         launches.forEach(launch -> {
-            final ExecutorInfo executorInfo = launch.getExtra(
-                    ExecutorPlugin.EXECUTORS_BLOCK_NAME,
-                    ExecutorInfo::new
-            );
-            launch.getResults().stream()
-                    .filter(result -> Objects.nonNull(result.getHistoryId()))
+            final ExecutorInfo executorInfo = launch.getExtra(ExecutorPlugin.EXECUTORS_BLOCK_NAME, ExecutorInfo::new);
+            launch.getResults().stream().filter(result -> Objects.nonNull(result.getHistoryId()))
                     .forEach(result -> updateHistory(history, result, executorInfo));
         });
         return history;
     }
 
-    private void updateHistory(final Map<String, HistoryData> history,
-                               final TestResult result,
-                               final ExecutorInfo info) {
+    private void updateHistory(final Map<String, HistoryData> history, final TestResult result,
+            final ExecutorInfo info) {
         //@formatter:off
         final HistoryData data = history.computeIfAbsent(
                 result.getHistoryId(),
@@ -145,18 +130,14 @@ public class HistoryPlugin implements Reader, Aggregator {
         if (!data.getItems().isEmpty()) {
             result.addExtraBlock(HISTORY_BLOCK_NAME, copy(data));
         }
-        final HistoryItem newItem = new HistoryItem()
-                .setUid(result.getUid())
-                .setStatus(result.getStatus())
-                .setStatusDetails(result.getStatusMessage())
-                .setTime(result.getTime());
+        final HistoryItem newItem = new HistoryItem().setUid(result.getUid()).setStatus(result.getStatus())
+                .setStatusDetails(result.getStatusMessage()).setTime(result.getTime());
 
         if (Objects.nonNull(info.getReportUrl())) {
             newItem.setReportUrl(createReportUrl(info.getReportUrl(), result.getUid()));
         }
 
-        final List<HistoryItem> newItems = Stream.concat(Stream.of(newItem), data.getItems().stream())
-                .limit(20)
+        final List<HistoryItem> newItems = Stream.concat(Stream.of(newItem), data.getItems().stream()).limit(100)
                 .collect(Collectors.toList());
         result.setNewFailed(isNewFailed(newItems));
         result.setFlaky(isFlaky(newItems));
@@ -167,9 +148,7 @@ public class HistoryPlugin implements Reader, Aggregator {
         final Statistic statistic = new Statistic();
         statistic.merge(other.getStatistic());
         final List<HistoryItem> items = new ArrayList<>(other.getItems());
-        return new HistoryData()
-                .setStatistic(statistic)
-                .setItems(items);
+        return new HistoryData().setStatistic(statistic).setItems(items);
     }
 
     private static String createReportUrl(final String reportUrl, final String uuid) {

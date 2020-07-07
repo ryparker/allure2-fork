@@ -78,27 +78,17 @@ public final class TestData {
     }
 
     public static List<HistoryTrendItem> randomHistoryTrendItems() {
-        return Arrays.asList(
-                randomHistoryTrendItem(),
-                randomHistoryTrendItem(),
-                randomHistoryTrendItem()
-        );
+        return Arrays.asList(randomHistoryTrendItem(), randomHistoryTrendItem(), randomHistoryTrendItem());
     }
 
     public static HistoryTrendItem randomHistoryTrendItem() {
-        return new HistoryTrendItem()
-                .setStatistic(randomStatistic())
-                .setBuildOrder(current().nextLong(100))
-                .setReportName(randomString())
-                .setReportUrl(randomString());
+        return new HistoryTrendItem().setStatistic(randomStatistic()).setBuildOrder(randomString())
+                .setReportName(randomString()).setReportUrl(randomString());
     }
 
     public static Statistic randomStatistic() {
-        return new Statistic()
-                .setFailed(current().nextLong(10))
-                .setBroken(current().nextLong(10))
-                .setPassed(current().nextLong(10))
-                .setSkipped(current().nextLong(10))
+        return new Statistic().setFailed(current().nextLong(10)).setBroken(current().nextLong(10))
+                .setPassed(current().nextLong(10)).setSkipped(current().nextLong(10))
                 .setUnknown(current().nextLong(10));
     }
 

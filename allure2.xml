@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="allure2" default="all">
+  
+  
+  <property file="allure2.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+    <include name="*.ane"/>
+    <include name="*.klib"/>
+    <include name="*.swc"/>
+    <include name="*.war"/>
+    <include name="*.zip"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.10" value="${jdk.home.10}/bin"/>
+  <path id="jdk.classpath.10">
+    <fileset dir="${jdk.home.10}">
+      <include name="../Home!/java.activation"/>
+      <include name="../Home!/java.base"/>
+      <include name="../Home!/java.compiler"/>
+      <include name="../Home!/java.corba"/>
+      <include name="../Home!/java.datatransfer"/>
+      <include name="../Home!/java.desktop"/>
+      <include name="../Home!/java.instrument"/>
+      <include name="../Home!/java.jnlp"/>
+      <include name="../Home!/java.logging"/>
+      <include name="../Home!/java.management"/>
+      <include name="../Home!/java.management.rmi"/>
+      <include name="../Home!/java.naming"/>
+      <include name="../Home!/java.prefs"/>
+      <include name="../Home!/java.rmi"/>
+      <include name="../Home!/java.scripting"/>
+      <include name="../Home!/java.se"/>
+      <include name="../Home!/java.se.ee"/>
+      <include name="../Home!/java.security.jgss"/>
+      <include name="../Home!/java.security.sasl"/>
+      <include name="../Home!/java.smartcardio"/>
+      <include name="../Home!/java.sql"/>
+      <include name="../Home!/java.sql.rowset"/>
+      <include name="../Home!/java.transaction"/>
+      <include name="../Home!/java.xml"/>
+      <include name="../Home!/java.xml.bind"/>
+      <include name="../Home!/java.xml.crypto"/>
+      <include name="../Home!/java.xml.ws"/>
+      <include name="../Home!/java.xml.ws.annotation"/>
+      <include name="../Home!/javafx.base"/>
+      <include name="../Home!/javafx.controls"/>
+      <include name="../Home!/javafx.deploy"/>
+      <include name="../Home!/javafx.fxml"/>
+      <include name="../Home!/javafx.graphics"/>
+      <include name="../Home!/javafx.media"/>
+      <include name="../Home!/javafx.swing"/>
+      <include name="../Home!/javafx.web"/>
+      <include name="../Home!/jdk.accessibility"/>
+      <include name="../Home!/jdk.aot"/>
+      <include name="../Home!/jdk.attach"/>
+      <include name="../Home!/jdk.charsets"/>
+      <include name="../Home!/jdk.compiler"/>
+      <include name="../Home!/jdk.crypto.cryptoki"/>
+      <include name="../Home!/jdk.crypto.ec"/>
+      <include name="../Home!/jdk.deploy"/>
+      <include name="../Home!/jdk.deploy.controlpanel"/>
+      <include name="../Home!/jdk.dynalink"/>
+      <include name="../Home!/jdk.editpad"/>
+      <include name="../Home!/jdk.hotspot.agent"/>
+      <include name="../Home!/jdk.httpserver"/>
+      <include name="../Home!/jdk.incubator.httpclient"/>
+      <include name="../Home!/jdk.internal.ed"/>
+      <include name="../Home!/jdk.internal.jvmstat"/>
+      <include name="../Home!/jdk.internal.le"/>
+      <include name="../Home!/jdk.internal.opt"/>
+      <include name="../Home!/jdk.internal.vm.ci"/>
+      <include name="../Home!/jdk.internal.vm.compiler"/>
+      <include name="../Home!/jdk.internal.vm.compiler.management"/>
+      <include name="../Home!/jdk.jartool"/>
+      <include name="../Home!/jdk.javadoc"/>
+      <include name="../Home!/jdk.javaws"/>
+      <include name="../Home!/jdk.jcmd"/>
+      <include name="../Home!/jdk.jconsole"/>
+      <include name="../Home!/jdk.jdeps"/>
+      <include name="../Home!/jdk.jdi"/>
+      <include name="../Home!/jdk.jdwp.agent"/>
+      <include name="../Home!/jdk.jfr"/>
+      <include name="../Home!/jdk.jlink"/>
+      <include name="../Home!/jdk.jshell"/>
+      <include name="../Home!/jdk.jsobject"/>
+      <include name="../Home!/jdk.jstatd"/>
+      <include name="../Home!/jdk.localedata"/>
+      <include name="../Home!/jdk.management"/>
+      <include name="../Home!/jdk.management.agent"/>
+      <include name="../Home!/jdk.management.cmm"/>
+      <include name="../Home!/jdk.management.jfr"/>
+      <include name="../Home!/jdk.management.resource"/>
+      <include name="../Home!/jdk.naming.dns"/>
+      <include name="../Home!/jdk.naming.rmi"/>
+      <include name="../Home!/jdk.net"/>
+      <include name="../Home!/jdk.pack"/>
+      <include name="../Home!/jdk.packager"/>
+      <include name="../Home!/jdk.packager.services"/>
+      <include name="../Home!/jdk.plugin"/>
+      <include name="../Home!/jdk.plugin.server"/>
+      <include name="../Home!/jdk.rmic"/>
+      <include name="../Home!/jdk.scripting.nashorn"/>
+      <include name="../Home!/jdk.scripting.nashorn.shell"/>
+      <include name="../Home!/jdk.sctp"/>
+      <include name="../Home!/jdk.security.auth"/>
+      <include name="../Home!/jdk.security.jgss"/>
+      <include name="../Home!/jdk.snmp"/>
+      <include name="../Home!/jdk.unsupported"/>
+      <include name="../Home!/jdk.xml.bind"/>
+      <include name="../Home!/jdk.xml.dom"/>
+      <include name="../Home!/jdk.xml.ws"/>
+      <include name="../Home!/jdk.zipfs"/>
+      <include name="../Home!/oracle.desktop"/>
+      <include name="../Home!/oracle.net"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.10}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.10}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.10"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.gradle:_com.beust:jcommander:1.78.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.beust/jcommander/1.78/a3927de9bd6f351429bcf763712c9890629d8f51/jcommander-1.78.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.fasterxml.jackson.core:jackson-annotations:2.9.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.9.0/7c10d545325e3a6e72e06381afe469fd40eb701/jackson-annotations-2.9.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.fasterxml.jackson.core:jackson-core:2.9.8.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.9.8/f5a654e4675769c716e5b387830d19b501ca191/jackson-core-2.9.8.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.fasterxml.jackson.core:jackson-databind:2.9.8.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.9.8/11283f21cc480aa86c4df7a0a3243ec508372ed2/jackson-databind-2.9.8.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.8.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.dataformat/jackson-dataformat-xml/2.9.8/6a068ddeeafe736da35fba3a7f64462081b562c9/jackson-dataformat-xml-2.9.8.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.8.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml/2.9.8/a1c807329eb0c75976aeb5961a506b3516ffeae3/jackson-dataformat-yaml-2.9.8.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.9.8.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.module/jackson-module-jaxb-annotations/2.9.8/da08815ba1c7f7b435e7df02b7bf98327bad2fd4/jackson-module-jaxb-annotations-2.9.8.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.fasterxml.woodstox:woodstox-core:5.0.3.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.fasterxml.woodstox/woodstox-core/5.0.3/10aa199207fda142eff01cd61c69244877d71770/woodstox-core-5.0.3.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.github.baev:jaxb-utils:1.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.github.baev/jaxb-utils/1.0/7463f66662f5bc4ea6e61de04bfccfafe6125d67/jaxb-utils-1.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.github.spotbugs:spotbugs-annotations:3.1.12.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.github.spotbugs/spotbugs-annotations/3.1.12/ba2c77a05091820668987292f245f3b089387bfa/spotbugs-annotations-3.1.12.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.google.code.findbugs:jsr305:3.0.2.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.opencsv:opencsv:4.6.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.opencsv/opencsv/4.6/b7ce164e9e75be4b5eb42fd89c9c53ebecea6729/opencsv-4.6.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.squareup.okhttp3:okhttp:3.12.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.12.0/b36f4a04584c0fb0d9af2d3401cdff8dacb1ea54/okhttp-3.12.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.squareup.okio:okio:1.15.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.15.0/bc28b5a964c8f5721eb58ee3f3c47a9bcbf4f4d8/okio-1.15.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.squareup.retrofit2:converter-jackson:2.6.1.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-jackson/2.6.1/dcd6ea200469757ab08ab28819fc7d0f8526948a/converter-jackson-2.6.1.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.squareup.retrofit2:retrofit:2.6.1.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.6.1/e09f83ea4eddf07fc956778dbda3c2d2b0b3ce7f/retrofit-2.6.1.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.vladsch.flexmark:flexmark-util:0.50.36.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.vladsch.flexmark/flexmark-util/0.50.36/ff0452a9ff56d164c9fa1b880562ed1fc8f93f57/flexmark-util-0.50.36.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.vladsch.flexmark:flexmark:0.50.36.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.vladsch.flexmark/flexmark/0.50.36/9b6a3169e240ee48800ea215ddf033ebfb221097/flexmark-0.50.36.jar"/>
+  </path>
+  
+  <path id="library.gradle:_commons-beanutils:commons-beanutils:1.9.3.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/commons-beanutils/commons-beanutils/1.9.3/c845703de334ddc6b4b3cd26835458cb1cba1f3d/commons-beanutils-1.9.3.jar"/>
+  </path>
+  
+  <path id="library.gradle:_commons-codec:commons-codec:1.11.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.11/3acb4705652e16236558f0f4f2192cc33c3bd189/commons-codec-1.11.jar"/>
+  </path>
+  
+  <path id="library.gradle:_commons-collections:commons-collections:3.2.2.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/commons-collections/commons-collections/3.2.2/8ad72fe39fa8c91eaaf12aadb21e0c3661fe26d5/commons-collections-3.2.2.jar"/>
+  </path>
+  
+  <path id="library.gradle:_commons-io:commons-io:2.6.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.6/815893df5f31da2ece4040fe0a12fd44b577afaf/commons-io-2.6.jar"/>
+  </path>
+  
+  <path id="library.gradle:_commons-logging:commons-logging:1.2.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar"/>
+  </path>
+  
+  <path id="library.gradle:_io.qameta.allure:allure-java-commons:2.13.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/io.qameta.allure/allure-java-commons/2.13.0/8d5b2898d325f5a3610f88d98d1ba9372a489856/allure-java-commons-2.13.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_io.qameta.allure:allure-junit-platform:2.13.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/io.qameta.allure/allure-junit-platform/2.13.0/1dfa71096fc9f1f84dd1ab4d3a94677eaddf01dd/allure-junit-platform-2.13.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_io.qameta.allure:allure-model:2.13.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/io.qameta.allure/allure-model/2.13.0/7bad9aba3fb8699b8607f6b552bfd00120be474e/allure-model-2.13.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_javax.activation:javax.activation-api:1.2.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/javax.activation/javax.activation-api/1.2.0/85262acf3ca9816f9537ca47d5adeabaead7cb16/javax.activation-api-1.2.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_javax.servlet:javax.servlet-api:3.1.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/javax.servlet/javax.servlet-api/3.1.0/3cd63d075497751784b2fa84be59432f4905bf7c/javax.servlet-api-3.1.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_javax.xml.bind:jaxb-api:2.3.1.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/javax.xml.bind/jaxb-api/2.3.1/8531ad5ac454cc2deb9d4d32c40c4d7451939b5d/jaxb-api-2.3.1.jar"/>
+  </path>
+  
+  <path id="library.gradle:_log4j:log4j:1.2.17.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.17/5af35056b4d257e4b64b9e8069c0746e8b08629f/log4j-1.2.17.jar"/>
+  </path>
+  
+  <path id="library.gradle:_net.bytebuddy:byte-buddy-agent:1.9.10.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.9.10/9674aba5ee793e54b864952b001166848da0f26b/byte-buddy-agent-1.9.10.jar"/>
+  </path>
+  
+  <path id="library.gradle:_net.bytebuddy:byte-buddy:1.9.10.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy/1.9.10/211a2b4d3df1eeef2a6cacf78d74a1f725e7a840/byte-buddy-1.9.10.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.allurefw:allure1-model:1.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.allurefw/allure1-model/1.0/cfd4d328364a7736448e42f088b53b5b8fb1c09d/allure1-model-1.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.apache.commons:commons-collections4:4.2.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-collections4/4.2/54ebea0a5b653d3c680131e73fe807bb8f78c4ed/commons-collections4-4.2.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.apache.commons:commons-lang3:3.9.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.9/122c7cee69b53ed4a7681c03d4ee4c0e2765da5/commons-lang3-3.9.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.apache.commons:commons-text:1.3.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-text/1.3/9abf61708a66ab5e55f6169a200dbfc584b546d9/commons-text-1.3.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.apache.httpcomponents:httpclient:4.5.9.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.9/a25c1be5ce99d0ce99aa43eb982868c796dd0775/httpclient-4.5.9.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.apache.httpcomponents:httpcore:4.4.11.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.11/de748cf874e4e193b42eceea9fe5574fabb9d4df/httpcore-4.4.11.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.apache.tika:tika-core:1.22.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.apache.tika/tika-core/1.22/b193f1f977e64ff77025a4cecd7997cff344c4bc/tika-core-1.22.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.apiguardian:apiguardian-api:1.0.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.apiguardian/apiguardian-api/1.0.0/3ef5276905e36f4d8055fe3cb0bdcc7503ffc85d/apiguardian-api-1.0.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.assertj:assertj-core:3.13.2.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.13.2/bb7b963fe752f69f055df0025691eceb83ce0c5d/assertj-core-3.13.2.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.codehaus.woodstox:stax2-api:3.1.4.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.codehaus.woodstox/stax2-api/3.1.4/ac19014b1e6a7c08aad07fe114af792676b685b7/stax2-api-3.1.4.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.eclipse.jetty:jetty-http:9.4.20.v20190813.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-http/9.4.20.v20190813/edda2fd904a881114aba79e2f881c6f4004e8148/jetty-http-9.4.20.v20190813.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.eclipse.jetty:jetty-io:9.4.20.v20190813.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-io/9.4.20.v20190813/b246c5e350d0aa1b310c07ec362755c34a1cc8cb/jetty-io-9.4.20.v20190813.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.eclipse.jetty:jetty-server:9.4.20.v20190813.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-server/9.4.20.v20190813/d4ee11134bca83db85919a1710fce022c67df3b7/jetty-server-9.4.20.v20190813.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.eclipse.jetty:jetty-util:9.4.20.v20190813.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-util/9.4.20.v20190813/8ee753d673a124ba2880361871ab13f6863b2d40/jetty-util-9.4.20.v20190813.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.freemarker:freemarker:2.3.29.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.freemarker/freemarker/2.3.29/46005eeee02e4458520c85d0bcf5001467b053c3/freemarker-2.3.29.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.jooq:joor-java-8:0.9.10.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jooq/joor-java-8/0.9.10/38c6c92afd1ae5e63ebd32f640f3e168c1bec0a9/joor-java-8-0.9.10.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.junit.jupiter:junit-jupiter-api:5.4.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.4.0/1a09f25a160f71c267f9ebe3b229b17805c683e9/junit-jupiter-api-5.4.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.junit.jupiter:junit-jupiter-engine:5.4.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-engine/5.4.0/30083adf3fbd7b734f12e6cb4d99dedab99fc34b/junit-jupiter-engine-5.4.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.junit.jupiter:junit-jupiter-params:5.4.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-params/5.4.0/7edc0a25bd3318d05a213aee09441d72e0921fab/junit-jupiter-params-5.4.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.junit.platform:junit-platform-commons:1.4.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.4.0/e0b2ed8fac32ad6469d75d034e759f1969db8dda/junit-platform-commons-1.4.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.junit.platform:junit-platform-engine:1.4.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.4.0/b4419dc190a5d82b9cac6b52e0af9140895c3f87/junit-platform-engine-1.4.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.junit.platform:junit-platform-launcher:1.4.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-launcher/1.4.0/5cc8b7b305ffc79aa124a1a4fe5efab114f28cac/junit-platform-launcher-1.4.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.mockito:mockito-core:3.0.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.mockito/mockito-core/3.0.0/15fd0225cb1858f6922f44776b1577ac26739279/mockito-core-3.0.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.objenesis:objenesis:2.6.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.objenesis/objenesis/2.6/639033469776fd37c08358c6b92a4761feb2af4b/objenesis-2.6.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.opentest4j:opentest4j:1.1.1.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.opentest4j/opentest4j/1.1.1/efd9f971e91074491ea55b19f67b13470cf4fcdd/opentest4j-1.1.1.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.projectlombok:lombok:1.18.8.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.8/448003bc1b234aac04b58e27d7755c12c3ec4236/lombok-1.18.8.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.slf4j:slf4j-api:1.7.28.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.28/2cd9b264f76e3d087ee21bfc99305928e1bdb443/slf4j-api-1.7.28.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.slf4j:slf4j-log4j12:1.7.28.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-log4j12/1.7.28/9c45c87557628d1c06d770e1382932dc781e3d5d/slf4j-log4j12-1.7.28.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.slf4j:slf4j-simple:1.7.28.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-simple/1.7.28/cf5f2cf3c31e0e41b68d932d756398a1238d4456/slf4j-simple-1.7.28.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.yaml:snakeyaml:1.23.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.yaml/snakeyaml/1.23/ec62d74fe50689c28c0ff5b35d3aebcaa8b5be68/snakeyaml-1.23.jar"/>
+  </path>
+  
+  <path id="library.gradle:_ru.qatools.commons:properties:2.0.rc5.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/ru.qatools.commons/properties/2.0.RC5/9c90f0e4211aedcc39c18cd77b2268ddb6563bad/properties-2.0.RC5.jar"/>
+  </path>
+  
+  <path id="library.gradle:_xmlwise:xmlwise:1.2.11.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/xmlwise/xmlwise/1.2.11/fdc3db36ae5f88a285ed0eb4166f3f6467fd7d6/xmlwise-1.2.11.jar"/>
+  </path>
+  
+  
+  <!-- Global Libraries -->
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <fileset dir="${javac2.home}">
+      <include name="javac2.jar"/>
+      <include name="jdom.jar"/>
+      <include name="asm-all*.jar"/>
+      <include name="forms-*.jar"/>
+    </fileset>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  <import file="${basedir}/.idea/modules/module_allure2.xml"/>
+  
+  <import file="${basedir}/.idea/modules/allure-commandline/module_allure2.allure-commandline.xml"/>
+  
+  <import file="${basedir}/.idea/modules/allure-generator/module_allure2.allure-generator.xml"/>
+  
+  <import file="${basedir}/.idea/modules/allure-jira-commons/module_allure2.allure-jira-commons.xml"/>
+  
+  <import file="${basedir}/.idea/modules/allure-plugin-api/module_allure2.allure-plugin-api.xml"/>
+  
+  <import file="${basedir}/.idea/modules/allure-plugin-api/module_allure2.allure-plugin-api.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/behaviors-plugin/module_allure2.behaviors-plugin.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/custom-logo-plugin/module_allure2.custom-logo-plugin.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/custom-logo-plugin/module_allure2.custom-logo-plugin.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/jira-plugin/module_allure2.jira-plugin.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/junit-xml-plugin/module_allure2.junit-xml-plugin.xml"/>
+  
+  <import file="${basedir}/.idea/modules/module_allure2.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/packages-plugin/module_allure2.packages-plugin.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/screen-diff-plugin/module_allure2.screen-diff-plugin.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/screen-diff-plugin/module_allure2.screen-diff-plugin.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/trx-plugin/module_allure2.trx-plugin.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/xctest-plugin/module_allure2.xctest-plugin.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/xray-plugin/module_allure2.xray-plugin.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/xunit-xml-plugin/module_allure2.xunit-xml-plugin.xml"/>
+  
+  <import file="${basedir}/.idea/modules/allure-generator/module_allure2.allure-generator.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/allure-jira-commons/module_allure2.allure-jira-commons.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/allure-plugin-api/module_allure2.allure-plugin-api.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/behaviors-plugin/module_allure2.behaviors-plugin.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/custom-logo-plugin/module_allure2.custom-logo-plugin.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/junit-xml-plugin/module_allure2.junit-xml-plugin.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/packages-plugin/module_allure2.packages-plugin.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/screen-diff-plugin/module_allure2.screen-diff-plugin.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/module_allure2.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/trx-plugin/module_allure2.trx-plugin.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/xctest-plugin/module_allure2.xctest-plugin.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/xunit-xml-plugin/module_allure2.xunit-xml-plugin.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/allure-commandline/module_allure2.allure-commandline.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/allure-generator/module_allure2.allure-generator.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/allure-jira-commons/module_allure2.allure-jira-commons.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/behaviors-plugin/module_allure2.behaviors-plugin.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/jira-plugin/module_allure2.jira-plugin.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/junit-xml-plugin/module_allure2.junit-xml-plugin.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/packages-plugin/module_allure2.packages-plugin.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/trx-plugin/module_allure2.trx-plugin.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/xctest-plugin/module_allure2.xctest-plugin.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/xray-plugin/module_allure2.xray-plugin.main.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/xunit-xml-plugin/module_allure2.xunit-xml-plugin.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/allure-commandline/module_allure2.allure-commandline.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/jira-plugin/module_allure2.jira-plugin.test.xml"/>
+  
+  <import file="${basedir}/.idea/modules/plugins/xray-plugin/module_allure2.xray-plugin.test.xml"/>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.allure2, clean.module.allure2.allure-commandline, clean.module.allure2.allure-generator, clean.module.allure2.allure-jira-commons, clean.module.allure2.allure-plugin-api, clean.module.allure2.allure-plugin-api.main, clean.module.allure2.behaviors-plugin, clean.module.allure2.custom-logo-plugin, clean.module.allure2.custom-logo-plugin.main, clean.module.allure2.jira-plugin, clean.module.allure2.junit-xml-plugin, clean.module.allure2.main, clean.module.allure2.packages-plugin, clean.module.allure2.screen-diff-plugin, clean.module.allure2.screen-diff-plugin.main, clean.module.allure2.trx-plugin, clean.module.allure2.xctest-plugin, clean.module.allure2.xray-plugin, clean.module.allure2.xunit-xml-plugin, clean.module.allure2.allure-generator.main, clean.module.allure2.allure-jira-commons.main, clean.module.allure2.allure-plugin-api.test, clean.module.allure2.behaviors-plugin.main, clean.module.allure2.custom-logo-plugin.test, clean.module.allure2.junit-xml-plugin.main, clean.module.allure2.packages-plugin.main, clean.module.allure2.screen-diff-plugin.test, clean.module.allure2.test, clean.module.allure2.trx-plugin.main, clean.module.allure2.xctest-plugin.main, clean.module.allure2.xunit-xml-plugin.main, clean.module.allure2.allure-commandline.main, clean.module.allure2.allure-generator.test, clean.module.allure2.allure-jira-commons.test, clean.module.allure2.behaviors-plugin.test, clean.module.allure2.jira-plugin.main, clean.module.allure2.junit-xml-plugin.test, clean.module.allure2.packages-plugin.test, clean.module.allure2.trx-plugin.test, clean.module.allure2.xctest-plugin.test, clean.module.allure2.xray-plugin.main, clean.module.allure2.xunit-xml-plugin.test, clean.module.allure2.allure-commandline.test, clean.module.allure2.jira-plugin.test, clean.module.allure2.xray-plugin.test" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.allure2, compile.module.allure2.allure-commandline, compile.module.allure2.allure-generator, compile.module.allure2.allure-jira-commons, compile.module.allure2.allure-plugin-api, compile.module.allure2.allure-plugin-api.main, compile.module.allure2.behaviors-plugin, compile.module.allure2.custom-logo-plugin, compile.module.allure2.custom-logo-plugin.main, compile.module.allure2.jira-plugin, compile.module.allure2.junit-xml-plugin, compile.module.allure2.main, compile.module.allure2.packages-plugin, compile.module.allure2.screen-diff-plugin, compile.module.allure2.screen-diff-plugin.main, compile.module.allure2.trx-plugin, compile.module.allure2.xctest-plugin, compile.module.allure2.xray-plugin, compile.module.allure2.xunit-xml-plugin, compile.module.allure2.allure-generator.main, compile.module.allure2.allure-jira-commons.main, compile.module.allure2.allure-plugin-api.test, compile.module.allure2.behaviors-plugin.main, compile.module.allure2.custom-logo-plugin.test, compile.module.allure2.junit-xml-plugin.main, compile.module.allure2.packages-plugin.main, compile.module.allure2.screen-diff-plugin.test, compile.module.allure2.test, compile.module.allure2.trx-plugin.main, compile.module.allure2.xctest-plugin.main, compile.module.allure2.xunit-xml-plugin.main, compile.module.allure2.allure-commandline.main, compile.module.allure2.allure-generator.test, compile.module.allure2.allure-jira-commons.test, compile.module.allure2.behaviors-plugin.test, compile.module.allure2.jira-plugin.main, compile.module.allure2.junit-xml-plugin.test, compile.module.allure2.packages-plugin.test, compile.module.allure2.trx-plugin.test, compile.module.allure2.xctest-plugin.test, compile.module.allure2.xray-plugin.main, compile.module.allure2.xunit-xml-plugin.test, compile.module.allure2.allure-commandline.test, compile.module.allure2.jira-plugin.test, compile.module.allure2.xray-plugin.test" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+</project>

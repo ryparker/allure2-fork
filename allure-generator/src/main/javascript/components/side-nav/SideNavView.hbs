@@ -1,16 +1,16 @@
 <div class="{{b 'side-nav' 'head'}}">
-    <a href="." class="{{b 'side-nav' 'brand'}}">
-        <span class="{{b 'side-nav' 'brand-text'}}">Allure</span>
+    <a href="https://dashboard.globalvetlink.com" class="{{b 'side-nav' 'brand'}}">
+        <span class="{{b 'side-nav' 'brand-text'}}">GVL</span>
     </a>
 </div>
 <ul class="{{b 'side-nav' 'menu'}}">
     {{#each tabs}}
-        <li class="{{b 'side-nav' 'item'}}" data-tooltip="{{t title}}">
-            <a href="#{{tabName}}" class="{{b 'side-nav' 'link' active=active}}">
-                <span class="{{b 'side-nav' 'icon'}} {{icon}}"></span>
-                <div class="{{b 'side-nav' 'text'}}">{{t title}}</div>
-            </a>
-        </li>
+    <li class="{{b 'side-nav' 'item'}}" data-tooltip="{{t title}}">
+        <a href="#{{tabName}}" class="{{b 'side-nav' 'link' active=active}}">
+            <span class="{{b 'side-nav' 'icon'}} {{icon}}"></span>
+            <div class="{{b 'side-nav' 'text'}}">{{t title}}</div>
+        </a>
+    </li>
     {{/each}}
 </ul>
 <div class="{{b 'side-nav' 'strut'}}"></div>

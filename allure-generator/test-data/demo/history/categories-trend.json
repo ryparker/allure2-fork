@@ -1,18 +1,18 @@
 [
   {
-  "buildOrder": 12,
-  "reportUrl": "https://ci.qameta.io/job/allure2/job/master/Demo2_Report/index.html",
-  "reportName": "Demo allure report",
-  "data": {
-    "Product defects": 4,
-    "Outdated tests": 2,
-    "Infrastructure problems": 2,
-    "Test defects": 1,
-    "Ignored tests": 1
-  }
-},
+    "buildOrder": "12",
+    "reportUrl": "https://ci.qameta.io/job/allure2/job/master/Demo2_Report/index.html",
+    "reportName": "Demo allure report",
+    "data": {
+      "Product defects": 4,
+      "Outdated tests": 2,
+      "Infrastructure problems": 2,
+      "Test defects": 1,
+      "Ignored tests": 1
+    }
+  },
   {
-    "buildOrder": 11,
+    "buildOrder": "11",
     "reportUrl": "https://ci.qameta.io/job/allure2/job/master/Demo2_Report/index.html",
     "reportName": "Demo report 1",
     "data": {
@@ -24,7 +24,7 @@
     }
   },
   {
-    "buildOrder": 10,
+    "buildOrder": "10",
     "reportUrl": "https://ci.qameta.io/job/allure2/job/master/Demo2_Report/index.html",
     "reportName": "Demo report",
     "data": {
@@ -36,7 +36,7 @@
     }
   },
   {
-    "buildOrder": 9,
+    "buildOrder": "9A",
     "reportName": "Demo allure report",
     "data": {
       "Product defects": 1,
@@ -46,7 +46,7 @@
     }
   },
   {
-    "buildOrder": 8,
+    "buildOrder": "8",
     "reportName": "Demo report 1",
     "data": {
       "Product defects": 1,
@@ -57,7 +57,7 @@
     }
   },
   {
-    "buildOrder": 7,
+    "buildOrder": "7",
     "reportName": "Demo report",
     "data": {
       "Product defects": 6,
