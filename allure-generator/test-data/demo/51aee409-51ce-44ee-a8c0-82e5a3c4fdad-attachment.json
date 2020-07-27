@@ -3,7 +3,7 @@
     "parentUid": "c51469d88be9f49cf313cabc267314e84dd67d1824608e01a03a8cc0bfe25a88",
     "name": "failedTestWithoutSteps",
     "title": "Failed test without steps",
-    "description": null,
+    "description": "\n### Test\n```typescript\nasync () => {\n  const response = await CRICKET_API.callApi({\n    endpoint: `treatment?animal.id=${ANIMAL.id}`,\n    method: \"GET\",\n  });\n\n  expect(response).toHaveStatusCode(200);\n  expect(response.duration).toHaveResponseTimeBelow(10);\n  expect(response.data).toStrictEqual(expect.any(Array));\n  expect(response.data.length).toBeGreaterThanOrEqual(1);\n  expect(response.data).toStrictEqual(expect.arrayContaining([TREATMENT]));\n  expect(response.data).toMatchSchema(\"list-response\");\n};\n\n```\n",
     "classname": "my.company.TestWithoutSteps",
     "failure": {
         "message": "5 is not 2 + 2\nExpected: is <4>\n     but: was <5>",

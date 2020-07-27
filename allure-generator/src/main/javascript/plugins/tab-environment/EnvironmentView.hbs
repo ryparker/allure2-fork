@@ -1,0 +1,22 @@
+<h2 class="__title">
+    {{t 'widget.environment.name'}}
+</h2>
+{{#if items}}
+    <div class="table  table_hover __table">
+    {{#each items}}
+        <div class="{{b "table" "row"}}" disabled>
+            <div class="{{b "table" "col"}} long-line">
+                {{name}}
+            </div>
+            <div class="{{b "table" "col"}} long-line">
+                {{#each values}}
+                    {{linky this}}{{#unless @last}},<br>{{/unless}}
+                {{/each}}
+            </div>
+        </div>
+    {{/each}}
+    </div>
+
+{{else}}
+    <div class="__noitems">{{t 'widget.environment.empty'}}</div>
+{{/if}}

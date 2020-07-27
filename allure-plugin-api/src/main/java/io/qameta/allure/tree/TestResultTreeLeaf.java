@@ -14,10 +14,13 @@
  *  limitations under the License.
  */
 package io.qameta.allure.tree;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import io.qameta.allure.entity.Status;
 import io.qameta.allure.entity.TestResult;
 import io.qameta.allure.entity.Time;
+import io.qameta.allure.entity.Label;
+import java.util.Optional;
 
 import java.util.List;
 
@@ -25,6 +28,7 @@ import java.util.List;
  * @author charlie (Dmitry Baev).
  */
 public class TestResultTreeLeaf extends DefaultTreeLeaf {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestResultTreeLeaf.class);
 
     private final String uid;
 
@@ -39,6 +43,7 @@ public class TestResultTreeLeaf extends DefaultTreeLeaf {
     private final boolean newFailed;
 
     private final List<String> parameters;
+    private final List<String> tags;
 
     public TestResultTreeLeaf(final String parentUid, final TestResult testResult) {
         this(
@@ -57,6 +62,7 @@ public class TestResultTreeLeaf extends DefaultTreeLeaf {
         this.flaky = testResult.isFlaky();
         this.newFailed = testResult.isNewFailed();
         this.parameters = testResult.getParameterValues();
+        this.tags = testResult.findAllLabels("tag");
 
     }
     public String getParentUid() {
@@ -85,5 +91,9 @@ public class TestResultTreeLeaf extends DefaultTreeLeaf {
 
     public List<String> getParameters() {
         return parameters;
+    }
+
+    public List<String> getTags() {
+        return tags;
     }
 }

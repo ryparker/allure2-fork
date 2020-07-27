@@ -35,6 +35,9 @@
       "name": "Timeline",
       "selected": "Selected {{count}} test ({{percent}}%) with duration above {{duration}}",
       "selected_plural": "Selected {{count}} tests ({{percent}}%) with duration above {{duration}}"
+    },
+    "environment": {
+      "name": "Environment"
     }
   },
   "widget": {
@@ -169,7 +172,7 @@
       "download": "Download CSV",
       "empty": "There are no items",
       "time": {
-        "total" : {
+        "total": {
           "name": "Total",
           "tooltip": "Duration from first test started to last test finished"
         },
