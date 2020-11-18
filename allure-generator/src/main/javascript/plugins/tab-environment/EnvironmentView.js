@@ -2,6 +2,7 @@ import "./styles.scss";
 
 import { View } from "backbone.marionette";
 import template from "./EnvironmentView.hbs";
+
 export default class EnvironmentView extends View {
   template = template;
 

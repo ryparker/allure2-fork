@@ -84,8 +84,6 @@ public class XrayTestRunExportPlugin implements Aggregator {
                                    final Supplier<JiraService> jiraServiceSupplier) {
         this.enabled = enabled;
         this.issues = issues;
-        LOGGER.info("ALLURE_XRAY_ENABLED '%b' " + enabled);
-        LOGGER.info("ALLURE_XRAY_EXECUTION_ISSUES '%s'" + issues);
         this.statusesMap.putAll(statusesMap);
         this.jiraServiceSupplier = jiraServiceSupplier;
     }
